@@ -14,7 +14,7 @@ def load_data():
 
 data = load_data()
 
-st.title("💡 Insurance Charges Prediction (Multiple Linear Regression)")
+st.title("💡 Insurance Charges Prediction")
 st.write("This app predicts medical insurance charges based on user inputs.")
 
 # Encode categorical variables
@@ -50,7 +50,7 @@ smoker = st.sidebar.selectbox("Smoker", le_smoker.classes_)
 sex_encoded = le_sex.transform([sex])[0]
 smoker_encoded = le_smoker.transform([smoker])[0]
 
-input_data = np.array([[age, sex_encoded, bmi, children, smoker_encoded, region_encoded]])
+input_data = np.array([[age, sex_encoded, bmi, children, smoker_encoded]])
 
 # Button for prediction
 if st.button("🔮 Predict Insurance Charges"):
@@ -71,4 +71,5 @@ if st.button("🔮 Predict Insurance Charges"):
     st.write(f"Training RMSE: {rmse_train:,.2f}")
     st.write(f"Test RMSE: {rmse_test:,.2f}")
     st.write(f"Test MAE: {mae_test:,.2f}")
+
 
