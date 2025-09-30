@@ -25,7 +25,7 @@ le_smoker = LabelEncoder()
 df["sex"] = le_sex.fit_transform(df["sex"])
 df["smoker"] = le_smoker.fit_transform(df["smoker"])
 
-X = df.drop("charges", axis=1)
+X = df.drop(["charges", "region"], axis=1)
 y = df["charges"]
 
 # Train-test split
@@ -71,5 +71,6 @@ if st.button("🔮 Predict Insurance Charges"):
     st.write(f"Training RMSE: {rmse_train:,.2f}")
     st.write(f"Test RMSE: {rmse_test:,.2f}")
     st.write(f"Test MAE: {mae_test:,.2f}")
+
 
 
