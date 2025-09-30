@@ -21,11 +21,9 @@ st.write("This app predicts medical insurance charges based on user inputs.")
 df = data.copy()
 le_sex = LabelEncoder()
 le_smoker = LabelEncoder()
-le_region = LabelEncoder()
 
 df["sex"] = le_sex.fit_transform(df["sex"])
 df["smoker"] = le_smoker.fit_transform(df["smoker"])
-df["region"] = le_region.fit_transform(df["region"])
 
 X = df.drop("charges", axis=1)
 y = df["charges"]
@@ -47,12 +45,10 @@ sex = st.sidebar.selectbox("Sex", le_sex.classes_)
 bmi = st.sidebar.number_input("BMI", min_value=10.0, max_value=50.0, value=25.0, step=0.1)
 children = st.sidebar.slider("Children", int(df.children.min()), int(df.children.max()), 0)
 smoker = st.sidebar.selectbox("Smoker", le_smoker.classes_)
-region = st.sidebar.selectbox("Region", le_region.classes_)
 
 # Convert categorical inputs to encoded values
 sex_encoded = le_sex.transform([sex])[0]
 smoker_encoded = le_smoker.transform([smoker])[0]
-region_encoded = le_region.transform([region])[0]
 
 input_data = np.array([[age, sex_encoded, bmi, children, smoker_encoded, region_encoded]])
 
@@ -75,3 +71,4 @@ if st.button("🔮 Predict Insurance Charges"):
     st.write(f"Training RMSE: {rmse_train:,.2f}")
     st.write(f"Test RMSE: {rmse_test:,.2f}")
     st.write(f"Test MAE: {mae_test:,.2f}")
+
